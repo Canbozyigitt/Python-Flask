@@ -25,7 +25,7 @@ def shares():
 
 @app.route("/profile")
 def profile():
-    return {"id": 1, "name": "can", "yas": 21}
+    return {"id": 2, "name": "can", "yas": 21}
 
 if __name__ == "__main__":
     app.run(debug=True)  # debug = true komutu hata ayıklama modunu çalıştırır

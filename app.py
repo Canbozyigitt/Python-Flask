@@ -2,22 +2,25 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from api.products import apiProducts
 from api.admins import apiAdmins
-from ecommerce import createApp
-from ecommerce.initialize_db import createDB
+from ecommerce import create_app 
+from initialize_db import createDB
+from api.categories import apiCategories
+from  api.users import apiUsers
 
 
 
-app=createApp()
+app=create_app()
 CORS(app) #özellikle bir frontend uygulamasının farklı bir alan adında çalışan bir backend API'sine istek yapması gerektiğinde kullanışlıdır
-createDB() 
-
+if __name__ == "__main__":
+    createDB()
 #app = Flask(__name__)  # flask uygulamasının nesnesini oluşturur
 app.register_blueprint(apiProducts)
-app.register_blueprint(apiAdmins)# daha düzenli hale getirir.modüllere ayırmayı sağlar 
-
+app.register_blueprint(apiAdmins)
+app.register_blueprint(apiCategories) # daha düzenli hale getirir.modüllere ayırmayı sağlar 
+app.register_blueprint(apiUsers)
 @app.route("/")
-def hello_world():
-    return jsonify({"success": "True", "message": "Hello World"})
+def index():
+    return jsonify({"success": "True", "message": "Main Page"})
 
 @app.route("/shares")  # gideceğim sayfayı belirler
 def shares():

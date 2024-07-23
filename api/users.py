@@ -20,7 +20,7 @@ def users():
 @apiUsers.route("/<int:id>")
 def user(id):
     try:
-        user=User.get_user_by_id(id)
+        user=User.get_user_by(id)
         userObj={"id":user.id,"username":user.username,"email":user.email,"password":user.password}
         return jsonify({"success":True,"data":userObj})
     except Exception as e:
